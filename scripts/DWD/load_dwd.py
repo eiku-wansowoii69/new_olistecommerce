@@ -1,3 +1,12 @@
+"""
+脚本名称：DWD 层数据加载脚本
+功能：按顺序调用 dwd schema 下的 9 个存储过程，将 raw 层最新批次的原始数据清洗后加载到 dwd 层的事实表和维度表。
+说明：脚本自动从 raw.etl_log 中获取最新成功的 raw 批次号，无需手动传参，保证 DWD 处理的数据与 raw 层最新批次一致；
+每张表通过独立事务调用对应存储过程（with engine.begin()），成功自动提交、失败自动回滚，单表失败不影响后续表；
+每次调用前后写入 raw.etl_log，日志 layer 字段固定为 'dwd'，与 raw 层日志共用同一张表，通过 layer 字段区分所属分层；
+成功时记录目标表实际行数，失败时记录异常信息，实现全链路可追溯。
+"""
+
 import time
 from datetime import datetime
 
