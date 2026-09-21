@@ -1,3 +1,13 @@
+"""
+脚本名称：raw 层数据导入脚本
+功能：读取本地 CSV 文件目录下的 9 个 Olist 数据集文件，逐个导入到 PostgreSQL 的 raw schema 对应表中，并写入 ETL 日志。
+说明：脚本采用函数式封装，主要包含 get_batch_id、log_start、log_end、load_one_file、load_all、main 六个函数；
+每次运行通过 raw.batch_id_seq 生成一个唯一批次号 batch_id，为本次导入的所有数据打上批次标记；
+每张表导入前先在 raw.etl_log 写入 running 记录，导入后更新为 success 或 failed，并记录行数和错误信息，日志 layer 字段固定为 'raw'；
+数据导入使用 PostgreSQL COPY 协议（psycopg2 的 copy_expert），性能远高于逐行 INSERT；
+每张表独立事务，单张表导入失败不影响其他表，实现按表粒度的隔离。
+"""
+
 import os
 import time
 from datetime import datetime
