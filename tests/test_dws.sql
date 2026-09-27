@@ -1,0 +1,26 @@
+-- 25 张表全部有数据
+SELECT 'sales_trend' AS tbl, COUNT(*) FROM dws.sales_trend
+UNION ALL SELECT 'sales_region',           COUNT(*) FROM dws.sales_region
+UNION ALL SELECT 'product_sales',          COUNT(*) FROM dws.product_sales
+UNION ALL SELECT 'product_sales_trend',    COUNT(*) FROM dws.product_sales_trend
+UNION ALL SELECT 'seller_sales',           COUNT(*) FROM dws.seller_sales
+UNION ALL SELECT 'customer_summary',       COUNT(*) FROM dws.customer_summary
+UNION ALL SELECT 'customer_rfm',           COUNT(*) FROM dws.customer_rfm
+UNION ALL SELECT 'customer_trend',         COUNT(*) FROM dws.customer_trend
+UNION ALL SELECT 'customer_region',        COUNT(*) FROM dws.customer_region
+UNION ALL SELECT 'customer_order_dist',    COUNT(*) FROM dws.customer_order_dist
+UNION ALL SELECT 'payment_type_summary',   COUNT(*) FROM dws.payment_type_summary
+UNION ALL SELECT 'payment_type_trend',     COUNT(*) FROM dws.payment_type_trend
+UNION ALL SELECT 'payment_installments',   COUNT(*) FROM dws.payment_installments
+UNION ALL SELECT 'payment_value_dist',     COUNT(*) FROM dws.payment_value_dist
+UNION ALL SELECT 'payment_type_region',    COUNT(*) FROM dws.payment_type_region
+UNION ALL SELECT 'delivery_summary',       COUNT(*) FROM dws.delivery_summary
+UNION ALL SELECT 'delivery_trend',         COUNT(*) FROM dws.delivery_trend
+UNION ALL SELECT 'delivery_region',        COUNT(*) FROM dws.delivery_region
+UNION ALL SELECT 'delivery_days_dist',     COUNT(*) FROM dws.delivery_days_dist
+UNION ALL SELECT 'delivery_seller_state',  COUNT(*) FROM dws.delivery_seller_state
+UNION ALL SELECT 'review_summary',         COUNT(*) FROM dws.review_summary
+UNION ALL SELECT 'review_score_dist',      COUNT(*) FROM dws.review_score_dist
+UNION ALL SELECT 'review_trend',           COUNT(*) FROM dws.review_trend
+UNION ALL SELECT 'review_product',         COUNT(*) FROM dws.review_product
+UNION ALL SELECT 'review_seller_state',    COUNT(*) FROM dws.review_seller_state;
