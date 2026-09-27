@@ -25,7 +25,8 @@ new_olistecommerce/
 │   └── Olist 原始数据集
 │
 ├── docs/
-│   └── 项目相关的ER图
+│   └── 数据流向图
+│   └── 实体关系图（ER图）
 │
 ├── scripts/
 │   │
@@ -35,11 +36,12 @@ new_olistecommerce/
 │   │
 │   ├── DWD/
 │   │   └── ddl_dwd.sql
+│   │   └── proc_load_dwd
 │   │   └── load_dwd.py
 │   │ 
 │   └── ADS/
 │       └── vw_exec_sales_overview.sql
-│       └── vw_seller_delivery_performance.sql
+│       └── vw_seller_delivery_performance.sql 
 │
 ├── tests/
 │   └── test_dwd.sql  
@@ -115,6 +117,8 @@ Olist CSV Dataset
 
 ### 销售看板
 
+![demo](BI看板/销售看板.png)
+
 核心指标包括：
 
 总收入
@@ -129,7 +133,6 @@ Olist CSV Dataset
 
 平均评分
 
-
 分析内容包括：
 
 月度销售趋势
@@ -143,6 +146,7 @@ Olist CSV Dataset
 评分分布
 
 ### 运营看板
+![demo](BI看板/运营看板.png)
 
 核心指标包括：
 
