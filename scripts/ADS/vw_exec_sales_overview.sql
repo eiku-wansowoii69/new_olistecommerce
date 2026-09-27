@@ -1,3 +1,16 @@
+/*
+脚本名称：vw_exec_sales_overview.sql
+功能：创建应用数据层（ads schema）的卖家配送绩效视图（vw_seller_delivery_performance），
+      通过关联 DWD 层的订单、订单明细、卖家、商品及评价表，整合出包含订单状态、配送时长、
+      延迟情况、价格、运费及评分的宽表，用于支撑卖家配送绩效的看板分析。
+说明：脚本使用 CREATE OR REPLACE VIEW 语句，支持重复运行（幂等）；视图以订单明细为粒度，
+      通过 LEFT JOIN 关联维度表和聚合后的评价表，避免数据丢失；
+      使用 CASE WHEN 动态计算 late_flag（准时/延迟/未知）字段；
+      WHERE 子句通过 raw.etl_log 动态获取最新成功执行的 DWD 批次（load_batch_id），
+      确保仅展示最新且完整的数据批次，实现数据版本隔离与可追溯。
+      涉及表：dwd.fact_orders、dwd.fact_order_items、dwd.dim_sellers、
+      dwd.dim_products、dwd.fact_order_reviews。
+*/
 CREATE OR REPLACE VIEW ads.vw_exec_sales_overview AS
 SELECT
     fo.order_id,
