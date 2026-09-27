@@ -117,7 +117,7 @@ Olist CSV Dataset
 
 ### 销售看板
 
-![demo](BI看板/销售看板.png)
+![demo](BI/销售看板.png)
 
 核心指标包括：
 
@@ -137,7 +137,7 @@ Olist CSV Dataset
 - 评分分配
 
 ### 运营看板
-![demo](BI看板/运营看板.png)
+![demo](BI/运营看板.png)
 
 核心指标包括：
 
