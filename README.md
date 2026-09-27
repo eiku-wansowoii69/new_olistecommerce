@@ -25,21 +25,28 @@ new_olistecommerce/
 │   └── Olist 原始数据集
 │
 ├── docs/
-│   └── 项目相关文档
+│   └── 项目相关的ER图
 │
 ├── scripts/
 │   │
 │   ├── ODS/
-│   │   └── ODS 层数据处理与监控
+│   │   └── init_ods.sql
+|   |   └── load_raw_to_postgres.py
 │   │
 │   ├── DWD/
-│   │   └── DWD 层数据清洗与处理
-│   │
+│   │   └── ddl_dwd.sql
+│   │   └── load_dwd.py
+│   │ 
 │   └── ADS/
-│       └── ADS 层业务分析数据加工
+│       └── vw_exec_sales_overview.sql
+│       └── vw_seller_delivery_performance.sql
 │
 ├── tests/
-│   └── 测试相关内容
+│   └── test_dwd.sql  
+│
+├── BI/
+│   └── 销售看板.png
+│   └── 运营看板.png
 │
 ├── LICENSE
 │
@@ -104,72 +111,68 @@ Olist CSV Dataset
 
 ---
 
-## 🗄️ 数据仓库设计
-
-### ODS —— Operational Data Store
-
-ODS（Operational Data Store）作为数据仓库的原始数据存储层，主要负责承接 Olist 原始 CSV 数据。
-
-这一层尽可能保留来源数据的原始结构，为后续 DWD 层的数据清洗和转换提供基础。
-
-### DWD —— Data Warehouse Detail
-
-DWD（Data Warehouse Detail）作为数据仓库明细层，对 ODS 层数据进行进一步处理。
-
-该层重点进行数据清洗、字段标准化以及不同业务数据之间的关联，为后续 ADS 层的业务分析提供相对规范的明细数据。
-
-### ODS / DWD 数据监控
-
-项目中使用 Python 对 **ODS、DWD 层的数据处理过程进行监控**。
-
-Python 在这里并不是简单替代 SQL 完成所有数据转换，而是作为数据处理流程中的辅助工具，对数据仓库处理过程进行监控。
-
-这种方式将 SQL 的数据仓库处理能力与 Python 的流程监控能力结合起来，使数据处理过程更加完整。
-
-### ADS —— Application Data Service
-
-ADS（Application Data Service）作为面向业务分析的应用数据层。
-
-在 DWD 明细数据的基础上，根据销售分析和运营分析需求进一步进行数据加工和指标计算，为 Tableau Dashboard 提供分析数据。
-
----
-
 ## 📊 BI 分析
 
 ### 销售看板
 
 核心指标包括：
+
 总收入
+
 总订单数
+
 总客户数
+
 客单价
+
 复购率
+
 平均评分
 
+
 分析内容包括：
+
 月度销售趋势
+
 各州销售地图
+
 品类销售 Top15
+
 新老客户趋势
+
 评分分布
 
 ### 运营看板
 
 核心指标包括：
+
 总卖家数
+
 总销量
+
 平均配送天数
+
 平均运费
+
 平均评分
+
 延迟率
 
+
 分析内容包括：
+
 配送时长分布
+
 订单状态分布
+
 各州运费地图
+
 品类评分 Top10
+
 卖家 Top10
+
 配送延迟率趋势
+
 价格 vs 运费散点图
 
 ---
